@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 
 void swap(int* n1, int* n2);
 void bubble(int lista[],int n);
@@ -13,17 +12,19 @@ int iterador= 0;
 
 int main(){
 
-	int lista[] = {3,6,2,1,4,8,5,7,9,10,11,12,13,14,15};
+	int lista[] = {1,2,3,3};
 	int largo = sizeof(lista)/sizeof(lista[0]);
-
 	int mitadInicial = calculoMitad(largo);
+	int numeroBuscado = 3;
 
 
-	printArray(lista,largo);
-	bubble(lista, largo);
-	printArray(lista,largo);
+	//printArray(lista,largo);
+	bubble(lista, largo);       // Ordena la lista
+	//printArray(lista,largo);
 
-	busquedaBinaria(lista,1,calculoMitad(largo), mitadInicial);
+
+
+	busquedaBinaria(lista,numeroBuscado,calculoMitad(largo), mitadInicial);  //Busca el elemento mediante recursividad
 
     return 0;
 
@@ -41,7 +42,7 @@ void busquedaBinaria(int lista[],int buscado,int mitad,int mitadInicial){
 
 	if (buscado == lista[mitad-1])
 	{
-		printf("El numero %i fue encontrado en indice %i iteracion %i \n",mitad,mitad-1,iterador);
+		printf("El numero %i fue encontrado en indice %i iteracion %i \n",buscado,mitad-1,iterador);
 		iterador = 0;
 	}
 }
@@ -77,8 +78,6 @@ void bubble(int lista[],int largo){
            swapped = 1;
         }
      }
- 
-     // IF no two elements were swapped by inner loop, then break
      if (swapped == 0)
         break;
    }	
