@@ -1,0 +1,36 @@
+void displayMenu(){                       /// MENU SACADO DEL CODIGO DE HEADS ENLAZADAS SIMPLES POR Davif J. Malan Y MODIFICADO POR NOSOTORS
+	int opcion;
+	do
+    {
+        //imprimir instrucciones
+        printf("\nMENU\n\n"
+               "1 - insertar nodo\n"
+               "2 - mostrar lista\n"
+               "3 - borrar nodo \n"
+               "4 - elementos en la lista\n"
+               "0 - quit\n\n");
+        
+        // obtener una opción
+        printf("Elija una opción: ");
+        scanf("%d",&opcion);
+        
+        // Ejecutar la opción
+        switch (opcion)
+        {
+            case 1: anadirElementoPrincipio(); system("clear"); break;
+            case 2: system("clear"); mostrarLista(); break;
+            case 3: system("clear"); eliminarElemento(); break;
+            case 4: system("clear"); printf("En tu lista hay %i elementos\n",elementosEnLista()); break;
+        }
+    }
+    while (opcion != 0);
+    
+    //borrando la lista al salir IMPORTANTE LIBERAR MEMORA
+    ptrN aux = HEAD;
+    while (aux != NULL)
+    {
+        ptrN auxaux = aux;
+        aux = aux->delante;
+        free(auxaux);
+    }
+}

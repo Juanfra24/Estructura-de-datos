@@ -1,0 +1,49 @@
+void eliminarElemento(){
+	int numero;
+	ptrN aux = HEAD;
+
+	if (elementosEnLista() == 0)
+	{
+		printf("No hay elementos para eliminar en la lista, porfavor ingrese uno\n");
+		return;
+	}
+
+
+	do{
+		printf("Ingrese el numero del elemento que desea eliminar, su lista tiene %i elementos \n",elementosEnLista());
+		scanf("%i",&numero);
+
+	}while(numero <= 0 || numero>elementosEnLista());
+
+	if (elementosEnLista() == 1 ) // Caso en el que hay un unico elemento en la lista
+	{
+		free(aux);
+		HEAD = NULL;
+		return;
+	}
+
+	for (int i = 1; i < numero; i++)
+	{
+		aux = aux->delante;
+	}
+	if (numero == 1)
+	{
+		aux->delante->detras = NULL;
+		HEAD = aux->delante;
+		free(aux);
+		return;
+	}
+	if (numero == elementosEnLista())
+	{
+		aux->detras->delante = NULL;
+		free(aux);
+		return;
+	}
+	else
+	{
+		aux->detras->delante = aux->delante;
+		aux->delante->detras = aux->detras;
+		free(aux);
+	}
+
+}

@@ -1,0 +1,11 @@
+//Crea un nodo vacio
+ptrN crearNodo(int n){
+	ptrN newptr = (ptrN) malloc(sizeof(nodo));
+    newptr->valor = n;
+    newptr->delante = NULL;
+    newptr->detras = NULL;
+
+
+    return newptr;
+}
+

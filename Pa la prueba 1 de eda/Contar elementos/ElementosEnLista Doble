@@ -1,0 +1,15 @@
+int elementosEnLista(){
+	ptrN aux = HEAD;
+	ptrN aux2 = HEAD;
+	int contador = 0;
+
+	while(aux != NULL){
+		contador++;
+		aux = aux->delante;
+	}
+	while(aux2 != NULL){
+		contador++;
+		aux2 = aux2->detras;
+	}
+	return contador-1;
+}

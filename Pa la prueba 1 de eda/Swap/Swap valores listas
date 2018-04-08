@@ -1,0 +1,7 @@
+//Funcion que cambia los numeros de un arreglo
+void swap(ptrN n1, ptrN n2){
+	int temp = n1->valor;
+	n1->valor = n2->valor;
+	n2->valor = temp;
+
+}

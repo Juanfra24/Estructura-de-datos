@@ -1,3 +1,6 @@
+// Tarea 4C: Búsqueda binaria recursiva/Juegos con recursión  Paul Mardones Y Juan Ternicien
+
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -12,14 +15,14 @@ int iterador= 0;
 
 int main(){
 
-	int lista[] = {1,2,3,3};
+	int lista[] = {1};
 	int largo = sizeof(lista)/sizeof(lista[0]);
 	int mitadInicial = calculoMitad(largo);
-	int numeroBuscado = 3;
+	int numeroBuscado = 1;
 
 
 	//printArray(lista,largo);
-	bubble(lista, largo);       // Ordena la lista
+	bubble(lista, largo);       // Ordena la lista algoritmo bubble
 	//printArray(lista,largo);
 
 

@@ -1,0 +1,20 @@
+void bubble(int lista[],int largo){
+   int i, j;
+   int swapped;
+   for (i = 0; i < largo-1; i++)
+   {
+     swapped = 0;
+     for (j = 0; j < largo-1-i; j++)
+     {
+        if (lista[j] > lista[j+1])
+        {
+           swap(&lista[j], &lista[j+1]);
+           swapped = 1;
+        }
+     }
+     if (swapped == 0)
+        break;
+   }	
+
+
+}

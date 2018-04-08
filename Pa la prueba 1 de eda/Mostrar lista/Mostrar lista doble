@@ -1,0 +1,26 @@
+//Imprime la lista de izquierda a derecha
+void mostrarLista(){
+
+	ptrN aux = HEAD;
+	if (aux == NULL){ printf("Tu lista se encuentra vacia\n"); return;}
+	char sentido = '1';
+	
+	if(sentido == '1'){
+		printf("Tu lista es: \n");
+
+		printf("NULL - ");
+		while(aux->detras != NULL){
+			aux = aux->detras;
+
+		}
+		while(aux != NULL){
+			printf("%d - ",aux->valor);
+			aux = aux->delante;
+		}
+		printf("NULL");
+
+
+	}
+	printf("\n");
+	
+}

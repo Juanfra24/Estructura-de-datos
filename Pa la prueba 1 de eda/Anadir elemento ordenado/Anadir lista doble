@@ -1,0 +1,114 @@
+// anade elemento de manera ordenada
+void anadirElemento(int x){
+	ptrN aux = HEAD;
+
+	int bolean = 0;
+	int valor = x;
+
+	ptrN nodoNuevo= crearNodo(valor);
+
+
+
+	if (HEAD == NULL){
+		HEAD = nodoNuevo;
+		bolean = 1;
+		return;
+	}
+
+
+	if (nodoNuevo->valor >= aux->valor)
+	{
+		if (aux->delante == NULL)
+		{
+			nodoNuevo->delante = NULL;
+			nodoNuevo->detras = aux;
+
+			aux->delante = nodoNuevo;
+
+			bolean =1;
+			
+		}
+
+		while(aux->delante != NULL && bolean != 1){
+
+			aux = aux->delante;
+
+			if(nodoNuevo->valor <= aux->valor){
+				nodoNuevo->delante = aux;
+				nodoNuevo->detras = aux->detras;
+				aux->detras->delante = nodoNuevo;
+				aux->detras = nodoNuevo;
+				bolean = 1;
+			}
+		}
+		if (bolean == 0)
+		{
+			nodoNuevo->delante = NULL;
+			nodoNuevo->detras = aux;
+			aux->delante=nodoNuevo;
+			bolean = 0;	
+		}
+		actualizarHead();
+
+	}
+	else{
+		if (aux->detras == NULL)
+		{
+			nodoNuevo->detras = NULL;
+			nodoNuevo->delante = aux;
+
+			aux->detras = nodoNuevo;
+
+			bolean = 1;
+			
+		}
+
+		while(aux->detras != NULL && bolean != 1){
+
+			aux = aux->detras;
+
+			if(nodoNuevo->valor >= aux->valor){
+				nodoNuevo->delante = aux->delante;
+				nodoNuevo->detras = aux;
+				aux->delante->detras = nodoNuevo;
+				aux->delante = nodoNuevo;
+				bolean = 1;
+			}
+		}
+		if (bolean == 0)
+		{
+			nodoNuevo->detras = NULL;
+			nodoNuevo->delante = aux;
+			aux->detras=nodoNuevo;
+			bolean = 0;	
+		}
+		actualizarHead();
+
+	}
+
+}
+void actualizarHead(){
+	ptrN aux = HEAD;
+
+	int elementos = elementosEnLista();
+	int mitad;
+
+
+	while(aux->detras != NULL){
+		aux = aux->detras;
+	}
+	if (elementos % 2 == 1)
+	{
+		mitad = (elementos+1)/2;
+	}
+	else{
+		mitad = elementos/2;
+	}
+	for (int i = 0; i < mitad-1; ++i)
+	{
+		aux= aux->delante;
+	}
+	
+	HEAD =aux;
+
+}

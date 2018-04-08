@@ -1,0 +1,9 @@
+typedef struct nodo{
+	int valor;
+	struct nodo* delante;
+	struct nodo* detras;
+
+
+}nodo;
+
+typedef nodo* ptrN;
