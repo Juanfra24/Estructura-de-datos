@@ -24,15 +24,33 @@ Edge* crearEdge();
 void insertarEdge();
 Vertex* crearVertex(int index);
 void insertarVertex(int index);
+int conocerVecinos(int nodo,int si);
+void chichoPopular();
+void menu();
+
+int mayor = 0;
 
 int main(){
-	FILE *grafoArchivo;
-	grafoArchivo = fopen ("grafo.txt", "r");
+	menu();
 
-	int mayor = 0;
+	int nodo;
+	scanf("%i",&nodo);
+
+	conocerVecinos(nodo,1);
+	
+	chichoPopular();
+
+	return 0;
+}
+
+
+
+
+void menu(){
 	int i = 0;
 
-
+	FILE *grafoArchivo;
+	grafoArchivo = fopen ("grafo.txt", "r");
 	while(1){
 	    ch = fgetc(grafoArchivo);
 	    
@@ -63,6 +81,11 @@ int main(){
 	      i++;
 	    }
   	}
+ 	head->endVertex = atoi(buffer);
+   	if (atoi(buffer)>mayor){mayor=atoi(buffer);}
+   	i = 0;
+	bzero(buffer, 32);
+
   	printf("Archivo leido\n");
   	printf("\n");
 	printf("--------------\n");
@@ -106,17 +129,15 @@ int main(){
 	}
 
 	printf("--------------\n");
-	return 0;
+
+	printf("Escribe el cual quieras buscar a sus vecinos\n");
+	fclose (grafoArchivo);
 }
-
-
-
-
-
 Edge* crearEdge(){
     Edge* newptr = (Edge*) malloc(sizeof(Edge));
     newptr->next = NULL;
-    return newptr;
+	return newptr;
+
 }
 
 void insertarEdge()
@@ -159,4 +180,87 @@ void insertarVertex(int index)
     	newptr->next= hd;
     	hd = newptr;
     }
+}
+int conocerVecinos(int nodo,int si){
+	int arregloFinal[mayor];
+	int cont = 0;
+	Edge* aux = head;
+	int brexit = 0;
+	while(aux != NULL){
+		if (aux->startVertex==aux->endVertex)
+		{
+			aux= aux->next;
+
+			continue;
+		}
+		if (aux->startVertex == nodo)
+		{
+
+			for (int i = 0; i < cont; ++i)
+			{
+				if (arregloFinal[i]==aux->endVertex)
+				{
+					brexit=1;
+				}
+			}
+			if (brexit ==0)
+			{
+				arregloFinal[cont]=aux->endVertex;
+				cont++;
+			}
+		}
+		if (aux->endVertex == nodo)
+		{
+			for (int i = 0; i < cont; ++i)
+			{
+				if (arregloFinal[i]==aux->startVertex)
+				{
+					brexit=1;
+				}
+			}
+			if (brexit ==0)
+			{
+				arregloFinal[cont]=aux->startVertex;
+				cont++;
+			}
+		}
+		brexit = 0;
+		aux= aux->next;
+	}
+	if (si==1)
+	{
+		for (int i = 0; i < cont; ++i)
+		{
+			printf("El vertice %i es vecino de %i \n",nodo,arregloFinal[i]);
+		}
+		if (cont == 0){
+			printf("El vertice %i no conecta cono nadie \n",nodo);
+		}
+	}
+	return cont;
+
+}
+void chichoPopular(){
+	//int cont = 0;
+	Edge* aux = head;
+	int mayor = -1;
+	int elegido[1];
+	while(aux != NULL){
+		int x= conocerVecinos(aux->startVertex,0);
+		if (x > mayor)
+		{
+			mayor= x;
+			elegido[0]=aux->startVertex;
+			elegido[1]=mayor;
+		}
+		x= conocerVecinos(aux->endVertex,0);
+		if (x > mayor)
+		{
+			mayor= x;
+			elegido[0]=aux->endVertex;
+			elegido[1]=mayor;
+		}
+		aux= aux->next;
+	}
+	printf("El Verice mas polular fue el nodo %i \n",elegido[0]);
 }
